@@ -1,8 +1,9 @@
 package org.zstack.sdk.iam2.api;
 
+import org.zstack.sdk.*;
+
 import java.util.HashMap;
 import java.util.Map;
-import org.zstack.sdk.*;
 
 public class LoginIAM2VirtualIDAction extends AbstractAction {
 
@@ -30,6 +31,12 @@ public class LoginIAM2VirtualIDAction extends AbstractAction {
 
     @Param(required = true, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
     public java.lang.String password;
+
+    @Param(required = false, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
+    public java.lang.String captchaUuid;
+
+    @Param(required = false, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
+    public java.lang.String verifyCode;
 
     @Param(required = false)
     public java.util.List systemTags;

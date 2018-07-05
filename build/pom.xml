@@ -44,7 +44,9 @@
                                     <excludes>
                                         <exclude>zstack.xml</exclude>
                                         <exclude>persistence.xml</exclude>
+                                        <exclude>springConfigXml/AccountManager.xml</exclude>
                                         <exclude>springConfigXml/localStorage.xml</exclude>
+                                        <exclude>springConfigXml/LdapManagerImpl.xml</exclude>
                                         <exclude>springConfigXml/HostAllocatorManager.xml</exclude>
                                         <exclude>springConfigXml/NfsPrimaryStorage.xml</exclude>
                                         <exclude>springConfigXml/sharedMountPointPrimaryStorage.xml</exclude>
@@ -282,6 +284,11 @@
                 <dependency>
                     <groupId>org.zstack</groupId>
                     <artifactId>premium-host-allocator</artifactId>
+                    <version>${project.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.zstack</groupId>
+                    <artifactId>ldap-premium</artifactId>
                     <version>${project.version}</version>
                 </dependency>
                 <dependency>

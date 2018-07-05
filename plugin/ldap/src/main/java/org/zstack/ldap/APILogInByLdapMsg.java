@@ -1,5 +1,6 @@
 package org.zstack.ldap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.zstack.header.identity.APISessionMessage;
 import org.zstack.header.identity.SuppressCredentialCheck;
@@ -18,6 +19,10 @@ public class APILogInByLdapMsg extends APISessionMessage {
     private String uid;
     @APIParam
     private String password;
+    @Autowired(required = false)
+    private String verifyCode;
+    @Autowired(required = false)
+    private String captchaUuid;
 
     public String getPassword() {
         return password;
@@ -34,7 +39,23 @@ public class APILogInByLdapMsg extends APISessionMessage {
     public void setUid(String uid) {
         this.uid = uid;
     }
- 
+
+    public String getVerifyCode() {
+        return verifyCode;
+    }
+
+    public void setVerifyCode(String verifyCode) {
+        this.verifyCode = verifyCode;
+    }
+
+    public String getCaptchaUuid() {
+        return captchaUuid;
+    }
+
+    public void setCaptchaUuid(String captchaUuid) {
+        this.captchaUuid = captchaUuid;
+    }
+
     public static APILogInByLdapMsg __example__() {
         APILogInByLdapMsg msg = new APILogInByLdapMsg();
         msg.setUid("ou=Employee,uid=test");
