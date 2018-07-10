@@ -2877,6 +2877,33 @@ trait ApiHelper {
     }
 
 
+    def checkLoginAvailability(@DelegatesTo(strategy = Closure.OWNER_FIRST, value = org.zstack.sdk.CheckLoginAvailabilityAction.class) Closure c) {
+        def a = new org.zstack.sdk.CheckLoginAvailabilityAction()
+        
+        c.resolveStrategy = Closure.OWNER_FIRST
+        c.delegate = a
+        c()
+        
+
+        if (System.getProperty("apipath") != null) {
+            if (a.apiId == null) {
+                a.apiId = Platform.uuid
+            }
+    
+            def tracker = new ApiPathTracker(a.apiId)
+            def out = errorOut(a.call())
+            def path = tracker.getApiPath()
+            if (!path.isEmpty()) {
+                Test.apiPaths[a.class.name] = path.join(" --->\n")
+            }
+        
+            return out
+        } else {
+            return errorOut(a.call())
+        }
+    }
+
+
     def checkStackTemplateParameters(@DelegatesTo(strategy = Closure.OWNER_FIRST, value = org.zstack.sdk.CheckStackTemplateParametersAction.class) Closure c) {
         def a = new org.zstack.sdk.CheckStackTemplateParametersAction()
         a.sessionId = Test.currentEnvSpec?.session?.uuid
@@ -10086,6 +10113,33 @@ trait ApiHelper {
     }
 
 
+    def getLdapLoginCaptcha(@DelegatesTo(strategy = Closure.OWNER_FIRST, value = org.zstack.sdk.GetLdapLoginCaptchaAction.class) Closure c) {
+        def a = new org.zstack.sdk.GetLdapLoginCaptchaAction()
+        
+        c.resolveStrategy = Closure.OWNER_FIRST
+        c.delegate = a
+        c()
+        
+
+        if (System.getProperty("apipath") != null) {
+            if (a.apiId == null) {
+                a.apiId = Platform.uuid
+            }
+    
+            def tracker = new ApiPathTracker(a.apiId)
+            def out = errorOut(a.call())
+            def path = tracker.getApiPath()
+            if (!path.isEmpty()) {
+                Test.apiPaths[a.class.name] = path.join(" --->\n")
+            }
+        
+            return out
+        } else {
+            return errorOut(a.call())
+        }
+    }
+
+
     def getLicenseAddOns(@DelegatesTo(strategy = Closure.OWNER_FIRST, value = org.zstack.sdk.GetLicenseAddOnsAction.class) Closure c) {
         def a = new org.zstack.sdk.GetLicenseAddOnsAction()
         
@@ -16232,6 +16286,33 @@ trait ApiHelper {
     }
 
 
+    def refreshCaptcha(@DelegatesTo(strategy = Closure.OWNER_FIRST, value = org.zstack.sdk.RefreshCaptchaAction.class) Closure c) {
+        def a = new org.zstack.sdk.RefreshCaptchaAction()
+        
+        c.resolveStrategy = Closure.OWNER_FIRST
+        c.delegate = a
+        c()
+        
+
+        if (System.getProperty("apipath") != null) {
+            if (a.apiId == null) {
+                a.apiId = Platform.uuid
+            }
+    
+            def tracker = new ApiPathTracker(a.apiId)
+            def out = errorOut(a.call())
+            def path = tracker.getApiPath()
+            if (!path.isEmpty()) {
+                Test.apiPaths[a.class.name] = path.join(" --->\n")
+            }
+        
+            return out
+        } else {
+            return errorOut(a.call())
+        }
+    }
+
+
     def refreshLoadBalancer(@DelegatesTo(strategy = Closure.OWNER_FIRST, value = org.zstack.sdk.RefreshLoadBalancerAction.class) Closure c) {
         def a = new org.zstack.sdk.RefreshLoadBalancerAction()
         a.sessionId = Test.currentEnvSpec?.session?.uuid
@@ -21554,6 +21635,33 @@ trait ApiHelper {
     def getIAM2VirtualIDAPIPermission(@DelegatesTo(strategy = Closure.OWNER_FIRST, value = org.zstack.sdk.iam2.api.GetIAM2VirtualIDAPIPermissionAction.class) Closure c) {
         def a = new org.zstack.sdk.iam2.api.GetIAM2VirtualIDAPIPermissionAction()
         a.sessionId = Test.currentEnvSpec?.session?.uuid
+        c.resolveStrategy = Closure.OWNER_FIRST
+        c.delegate = a
+        c()
+        
+
+        if (System.getProperty("apipath") != null) {
+            if (a.apiId == null) {
+                a.apiId = Platform.uuid
+            }
+    
+            def tracker = new ApiPathTracker(a.apiId)
+            def out = errorOut(a.call())
+            def path = tracker.getApiPath()
+            if (!path.isEmpty()) {
+                Test.apiPaths[a.class.name] = path.join(" --->\n")
+            }
+        
+            return out
+        } else {
+            return errorOut(a.call())
+        }
+    }
+
+
+    def getIAM2VirtualIDLoginCaptcha(@DelegatesTo(strategy = Closure.OWNER_FIRST, value = org.zstack.sdk.iam2.api.GetIAM2VirtualIDLoginCaptchaAction.class) Closure c) {
+        def a = new org.zstack.sdk.iam2.api.GetIAM2VirtualIDLoginCaptchaAction()
+        
         c.resolveStrategy = Closure.OWNER_FIRST
         c.delegate = a
         c()

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.zstack.sdk.*;
 
-public class LogInByLdapAction extends AbstractAction {
+public class CheckLoginAvailabilityAction extends AbstractAction {
 
     private static final HashMap<String, Parameter> parameterMap = new HashMap<>();
 
@@ -12,7 +12,7 @@ public class LogInByLdapAction extends AbstractAction {
 
     public static class Result {
         public ErrorCode error;
-        public org.zstack.sdk.LogInByLdapResult value;
+        public org.zstack.sdk.CheckLoginAvailabilityResult value;
 
         public Result throwExceptionIfError() {
             if (error != null) {
@@ -26,16 +26,7 @@ public class LogInByLdapAction extends AbstractAction {
     }
 
     @Param(required = true, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String uid;
-
-    @Param(required = true, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String password;
-
-    @Param(required = false)
-    public java.lang.String verifyCode;
-
-    @Param(required = false)
-    public java.lang.String captchaUuid;
+    public java.lang.String accountName;
 
     @Param(required = false)
     public java.util.List systemTags;
@@ -51,8 +42,8 @@ public class LogInByLdapAction extends AbstractAction {
             return ret;
         }
         
-        org.zstack.sdk.LogInByLdapResult value = res.getResult(org.zstack.sdk.LogInByLdapResult.class);
-        ret.value = value == null ? new org.zstack.sdk.LogInByLdapResult() : value; 
+        org.zstack.sdk.CheckLoginAvailabilityResult value = res.getResult(org.zstack.sdk.CheckLoginAvailabilityResult.class);
+        ret.value = value == null ? new org.zstack.sdk.CheckLoginAvailabilityResult() : value; 
 
         return ret;
     }
@@ -81,11 +72,11 @@ public class LogInByLdapAction extends AbstractAction {
 
     protected RestInfo getRestInfo() {
         RestInfo info = new RestInfo();
-        info.httpMethod = "PUT";
-        info.path = "/ldap/login";
+        info.httpMethod = "GET";
+        info.path = "/identity/login/availability";
         info.needSession = false;
         info.needPoll = false;
-        info.parameterName = "logInByLdap";
+        info.parameterName = "";
         return info;
     }
 

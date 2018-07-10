@@ -183,4 +183,10 @@ public class PathUtil {
             logger.warn(String.format("Failed to delete file[path:%s]", path));
         }
     }
+
+    public static boolean mkdirsIfNotExsits(String path) {
+        File f = new File(path);
+
+        return f.exists() || f.mkdirs();
+    }
 }

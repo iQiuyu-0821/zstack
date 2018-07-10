@@ -442,7 +442,7 @@ public class AccountManagerImpl extends AbstractService implements AccountManage
         bus.reply(msg, reply);
     }
 
-    private SessionInventory getSession(String accountUuid, String userUuid) {
+    protected SessionInventory getSession(String accountUuid, String userUuid) {
         int maxLoginTimes = org.zstack.identity.IdentityGlobalConfig.MAX_CONCURRENT_SESSION.value(Integer.class);
         SimpleQuery<SessionVO> query = dbf.createQuery(SessionVO.class);
         query.add(SessionVO_.accountUuid, Op.EQ, accountUuid);
@@ -509,11 +509,17 @@ public class AccountManagerImpl extends AbstractService implements AccountManage
         q.add(AccountVO_.password, Op.EQ, msg.getPassword());
         AccountVO vo = q.find();
         if (vo == null) {
+            for (AccountLoginExtensionPoint ext : pluginRgty.getExtensionList(AccountLoginExtensionPoint.class)) {
+                ext.failedToLogin(msg.getAccountName());
+            }
             reply.setError(errf.instantiateErrorCode(IdentityErrors.AUTHENTICATION_ERROR, "wrong account name or password"));
             bus.reply(msg, reply);
             return;
         }
 
+        for (AccountLoginExtensionPoint ext : pluginRgty.getExtensionList(AccountLoginExtensionPoint.class)) {
+            ext.afterLogin(vo.getUuid());
+        }
         reply.setInventory(getSession(vo.getUuid(), vo.getUuid()));
         bus.reply(msg, reply);
     }
